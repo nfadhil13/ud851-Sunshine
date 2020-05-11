@@ -215,14 +215,39 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-            mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
-            return true;
+        switch (id) {
+            case R.id.action_refresh:
+                mForecastAdapter.setWeatherData(null);
+                loadWeatherData();
+                return true;
+            case R.id.action_map:
+                openLocationInMap();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
-
-        return super.onOptionsItemSelected(item);
     }
+
+        // TODO (2) Launch the map when the map menu item is clicked
+        public void openLocationInMap(){
+            String addresing = "Reog vi no.15";
+
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("geo")
+                    .path("0,0")
+                    .appendQueryParameter("q",addresing);
+
+            Uri addressUri = builder.build();
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            intent.setData(addressUri);
+
+            if(intent.resolveActivity(getPackageManager())!=null){
+                startActivity(intent);
+            }
+        }
+
+
 }
