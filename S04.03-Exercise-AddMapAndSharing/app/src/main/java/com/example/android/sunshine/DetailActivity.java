@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         int selectedItem = item.getItemId();
 
         if(selectedItem == R.id.action_share){
-
+            shareText(mForecast);
         }
 
         return super.onOptionsItemSelected(item);
